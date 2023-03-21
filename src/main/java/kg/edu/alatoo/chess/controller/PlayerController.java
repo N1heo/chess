@@ -64,7 +64,7 @@ public class PlayerController {
             JsonNode node = mapper.readTree(res);
 
             player.setUsername(username);
-            // player.setFull_name(node.get("name").asText());
+            player.setFull_name(node.get("name").asText());
 
             url = "https://api.chess.com/pub/player/" + username + "/stats";
 

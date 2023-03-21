@@ -16,6 +16,7 @@
     <tr>
         <th scope="col">#</th>
         <th scope="col">Username</th>
+        <th scope="col">Full_name</th>
         <th scope="col">Rapid_rating</th>
     </tr>
     </thead>
@@ -23,6 +24,7 @@
     <tr th:each="player : ${players}">
         <th scope="row" th:text="${player.id}"></th>
         <td th:text="${player.username}"></td>
+        <td th:text="${player.full_name}"></td>
         <td th:text="${player.rapid_rating}"></td>
     </tr>
 
