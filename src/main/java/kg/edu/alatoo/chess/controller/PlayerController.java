@@ -1,90 +1,92 @@
-// package kg.edu.alatoo.chess.controller;
+package kg.edu.alatoo.chess.controller;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.http.HttpStatus;
-// import org.springframework.http.ResponseEntity;
-// import org.springframework.stereotype.Controller;
-// import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.RequestMapping;
-// import org.springframework.web.bind.annotation.RequestParam;
-// import org.springframework.web.bind.annotation.RestController;
-// import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
 
-// import com.fasterxml.jackson.core.JsonProcessingException;
-// import com.fasterxml.jackson.databind.JsonMappingException;
-// import com.fasterxml.jackson.databind.JsonNode;
-// import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-// import kg.edu.alatoo.chess.entity.Player;
-// import kg.edu.alatoo.chess.repository.PlayerRepository;
-// import kg.edu.alatoo.chess.util.HttpRequest;
+import kg.edu.alatoo.chess.entity.Player;
+import kg.edu.alatoo.chess.repository.PlayerRepository;
+import kg.edu.alatoo.chess.util.HttpRequest;
 
-// @Controller
-// public class PlayerController {
+@Controller
+public class PlayerController {
 
-//     @Autowired
-//     PlayerRepository playerRepository;
+    @Autowired
+    PlayerRepository playerRepository;
     
-//     @GetMapping(value = "/table")
-//     public String getPlayer(Model model) {
-//         try {
-//             // HttpRequest request = HttpRequest
-//             //         .get("https://api.chess.com/pub/player/n1heo/stats")
-//             //         .connectTimeout(120000);
-//             // String res = request.body();
-//             // ObjectMapper mapper = new ObjectMapper();
-//             // Player player = new Player();
-//             // JsonNode node = mapper.readTree(res);
-//             // player.setRapid_rating(node.get("chess_rapid").get("last").get("rating").asInt());
-//             // playerRepository.save(player);
-//             model.addAttribute("players", playerRepository.findAll());
-//             return "table";
-//         }catch (Exception e){
-//             e.printStackTrace();
-//             return "error";
-//         }
-//     }
+    @GetMapping("/table")
+    public String getPlayer(Model model) {
+        try {
+            System.out.println("Get works");
+            // HttpRequest request = HttpRequest
+            //         .get("https://api.chess.com/pub/player/n1heo/stats")
+            //         .connectTimeout(120000);
+            // String res = request.body();
+            // ObjectMapper mapper = new ObjectMapper();
+            // Player player = new Player();
+            // JsonNode node = mapper.readTree(res);
+            // player.setRapid_rating(node.get("chess_rapid").get("last").get("rating").asInt());
+            // playerRepository.save(player);
+            model.addAttribute("players", playerRepository.findAll());
+            return "table";
+        }catch (Exception e){
+            e.printStackTrace();
+            return "table";
+        }
+    }
 
-//     @PostMapping(value = "/table")
-//     public String setPlayer(@RequestParam String username,
-//                             Model model) throws JsonMappingException, JsonProcessingException {
-//         try{
-            
-//             String url = "https://api.chess.com/pub/player/" + username ;
-//             HttpRequest request = HttpRequest
-//                     .get(url)
-//                     .connectTimeout(120000);
-//             String res = request.body();
+    @PostMapping("/table")
+    public String setPlayer(@RequestParam String username,
+                            Model model) throws JsonMappingException, JsonProcessingException {
+        try{
+            System.out.println("Post works");
+            String url = "https://api.chess.com/pub/player/" + username ;
+            HttpRequest request = HttpRequest
+                    .get(url)
+                    .connectTimeout(120000);
+            String res = request.body();
 
-//             ObjectMapper mapper = new ObjectMapper();
-//             Player player = new Player();
-//             JsonNode node = mapper.readTree(res);
+            ObjectMapper mapper = new ObjectMapper();
+            Player player = new Player();
+            JsonNode node = mapper.readTree(res);
 
-//             player.setUsername(username);
-//             // player.setFull_name(node.get("name").asText());
+            player.setUsername(username);
+            // player.setFull_name(node.get("name").asText());
 
-//             url = "https://api.chess.com/pub/player/" + username + "/stats";
+            url = "https://api.chess.com/pub/player/" + username + "/stats";
 
-//             request = HttpRequest
-//                     .get(url)
-//                     .connectTimeout(120000);
-//             res = request.body();
+            request = HttpRequest
+                    .get(url)
+                    .connectTimeout(120000);
+            res = request.body();
 
-//             node = mapper.readTree(res);
+            node = mapper.readTree(res);
 
-//             player.setRapid_rating(node.get("chess_rapid").get("last").get("rating").asInt());
+            player.setRapid_rating(node.get("chess_rapid").get("last").get("rating").asInt());
 
-//             playerRepository.save(player);
+            playerRepository.save(player);
 
-//             model.addAttribute("players", playerRepository.findAll());
+            model.addAttribute("players", playerRepository.findAll());
 
-//             return "table";
-//         } catch (java.lang.NullPointerException e){
-//             e.printStackTrace();
-//             model.addAttribute("players", playerRepository.findAll());
-//             return "table";
-//         }
+            return "table";
+        } catch (java.lang.NullPointerException e){
+            e.printStackTrace();
+            model.addAttribute("players", playerRepository.findAll());
+            return "table";
+        }
         
-//     }
-// }
+    }
+}
