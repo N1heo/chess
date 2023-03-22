@@ -17,10 +17,7 @@
         <th scope="col">#Id</th>
         <th scope="col">Username</th>
         <th scope="col">Full_name</th>
-        <th scope="col">
-            Rapid_rating 
-            <button onclick="sortTable()">Sort</button>
-        </th>
+        <th onclick="sortTable()" scope="col">Rapid_rating</th>
     </tr>
     </thead>
     <tbody>
@@ -35,10 +32,11 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"> </script>
 <script>
-function sortTable() {
-  var table, rows, switching, i, x, y, shouldSwitch;
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("myTable");
   switching = true;
+  dir = "desc";
   while (switching) {
     switching = false;
     rows = table.rows;
@@ -46,14 +44,27 @@ function sortTable() {
       shouldSwitch = false;
       x = rows[i].getElementsByTagName("TD")[0];
       y = rows[i + 1].getElementsByTagName("TD")[0];
-      if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-        shouldSwitch = true;
-        break;
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          shouldSwitch = true;
+          break;
+        }
       }
     }
     if (shouldSwitch) {
       rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
       switching = true;
+      switchcount ++;
+    } else {
+      if (switchcount == 0 && dir == "desc") {
+        dir = "asc";
+        switching = true;
+      }
     }
   }
 }
