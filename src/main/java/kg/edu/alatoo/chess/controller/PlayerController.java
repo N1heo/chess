@@ -64,7 +64,12 @@ public class PlayerController {
             JsonNode node = mapper.readTree(res);
 
             player.setUsername(username);
-            player.setFull_name(node.get("name").asText());
+
+            if((node.get("name")) != null){
+                player.setFull_name(node.get("name").asText());
+            } else{
+                player.setFull_name("-");
+            }
 
             url = "https://api.chess.com/pub/player/" + username + "/stats";
 
@@ -82,7 +87,7 @@ public class PlayerController {
             model.addAttribute("players", playerRepository.findAll());
 
             return "table";
-        } catch (java.lang.NullPointerException e){
+        } catch (java.lang.NullPointerException | org.springframework.dao.DataIntegrityViolationException e){
             e.printStackTrace();
             model.addAttribute("players", playerRepository.findAll());
             return "table";
