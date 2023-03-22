@@ -11,13 +11,16 @@
     <input type="text" name="username" placeholder="Enter username of a player: ">
     <input type="submit" class="btn btn-primary">
 </form>
-<table class="table">
+<table class="table" id="myTable">
     <thead>
-    <tr>
-        <th scope="col">#</th>
+    <tr id="headerRow">
+        <th scope="col">#Id</th>
         <th scope="col">Username</th>
         <th scope="col">Full_name</th>
-        <th scope="col">Rapid_rating</th>
+        <th scope="col">
+            Rapid_rating 
+            <button onclick="sortTable()">Sort</button>
+        </th>
     </tr>
     </thead>
     <tbody>
@@ -27,34 +30,33 @@
         <td th:text="${player.full_name}"></td>
         <td th:text="${player.rapid_rating}"></td>
     </tr>
-
     </tbody>
 </table>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"> </script>
 <script>
-    function sortTable(table, column) {
-      var rows = table.find('tbody > tr').get();
-      rows.sort(function(a, b) {
-        var A = parseInt($(a).children('td').eq(column).text());
-        var B = parseInt($(b).children('td').eq(column).text());
-        if (A < B) {
-          return -1;
-        }
-        if (A > B) {
-          return 1;
-        }
-        return 0;
-      });
-      $.each(rows, function(index, row) {
-        table.children('tbody').append(row);
-      });
+function sortTable() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("myTable");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("TD")[0];
+      y = rows[i + 1].getElementsByTagName("TD")[0];
+      if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
     }
-
-    $(document).ready(function() {
-      var table = $('table');
-      sortTable(table, 2);
-    });
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
 </script>
 </body>
 </html>
