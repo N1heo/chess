@@ -21,7 +21,7 @@
           <h2 class="text-center">Add a player: </h2>
           <div class="col-lg-6">
             <form action="/table" method="post">
-              <input type="text" name="username" placeholder="Enter username of a player: ">
+              <input id="addUsername" type="text" name="username" placeholder="Enter username of a player: ">
               <input id="submitBtn" type="submit" class="btn btn-primary">
             </form>
           </div>
@@ -54,6 +54,7 @@
   <section id="logout">
     <div class="row mt-4 justify-content-md-right text-center">
       <form th:action="@{/logout}" method="post">
+        <p class="float-start" ><a href="/home">Home</a></p>
         <input class="float-end" type="submit" value="Sign Out"/>
       </form>
     </div>
@@ -72,17 +73,19 @@
         rows = table.rows;
         for (i = 1; i < (rows.length - 1); i++) {
           shouldSwitch = false;
-          x = rows[i].getElementsByTagName("TD")[0];
-          y = rows[i + 1].getElementsByTagName("TD")[0];
+          x = rows[i].getElementsByTagName("TD")[2];
+          y = rows[i + 1].getElementsByTagName("TD")[2];
           if (dir == "asc") {
-            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            if (Number(x.innerHTML) > Number(y.innerHTML)) {
               shouldSwitch = true;
               break;
+              console.log(x.innerHTMl);
             }
           } else if (dir == "desc") {
-            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            if (Number(x.innerHTML) < Number(y.innerHTML)) {
               shouldSwitch = true;
               break;
+              console.log(x.innerHTMl);
             }
           }
         }
@@ -97,6 +100,7 @@
           }
         }
       }
+      
     }
   </script>
 </body>

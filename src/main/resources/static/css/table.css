@@ -19,3 +19,8 @@ body {
     background-color: lightskyblue;
     color: white;
 }
+
+#addUsername {
+    font-size: 20px;
+    width: 230px;
+}
