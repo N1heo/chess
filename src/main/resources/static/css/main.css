@@ -1,0 +1,25 @@
+body {
+    background-color: lightgray !important;
+}
+
+.imageAlaToo {
+    width: 50; 
+    height: auto;
+}
+
+#rest {
+    margin-top: 50px;
+}
+
+#playersTable {
+    margin-top: 50px;
+}
+
+#footer {
+    margin-top: 400px;
+}
+
+#login {
+    margin-right:20px;
+    font-size: 22px;
+}

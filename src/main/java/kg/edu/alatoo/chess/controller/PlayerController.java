@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -31,15 +32,6 @@ public class PlayerController {
     public String getPlayer(Model model) {
         try {
             System.out.println("Get works");
-            // HttpRequest request = HttpRequest
-            //         .get("https://api.chess.com/pub/player/n1heo/stats")
-            //         .connectTimeout(120000);
-            // String res = request.body();
-            // ObjectMapper mapper = new ObjectMapper();
-            // Player player = new Player();
-            // JsonNode node = mapper.readTree(res);
-            // player.setRapid_rating(node.get("chess_rapid").get("last").get("rating").asInt());
-            // playerRepository.save(player);
             model.addAttribute("players", playerRepository.findAll());
             return "table";
         }catch (Exception e){
@@ -50,7 +42,7 @@ public class PlayerController {
 
     @PostMapping("/table")
     public String setPlayer(@RequestParam String username,
-                            Model model) throws JsonMappingException, JsonProcessingException {
+                            Model model, RedirectAttributes redirAttrs) throws JsonMappingException, JsonProcessingException {
         try{
             System.out.println("Post works");
             String url = "https://api.chess.com/pub/player/" + username ;
@@ -87,10 +79,16 @@ public class PlayerController {
             model.addAttribute("players", playerRepository.findAll());
 
             return "table";
-        } catch (java.lang.NullPointerException | org.springframework.dao.DataIntegrityViolationException e){
-            e.printStackTrace();
+        } catch (java.lang.NullPointerException e){
+            // e.printStackTrace();
             model.addAttribute("players", playerRepository.findAll());
-            return "table";
+            redirAttrs.addFlashAttribute("error", "No such user exists.");
+            return "redirect:/table";
+        } catch (org.springframework.dao.DataIntegrityViolationException ex){
+            // ex.printStackTrace();
+            model.addAttribute("players", playerRepository.findAll());
+            redirAttrs.addFlashAttribute("error", "User already in the table.");
+            return "redirect:/table";
         }
         
     }

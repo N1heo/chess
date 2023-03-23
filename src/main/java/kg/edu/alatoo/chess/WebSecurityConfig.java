@@ -3,6 +3,7 @@ package kg.edu.alatoo.chess;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,9 +17,16 @@ public class WebSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		String[] staticResources = {
+			"/css/**",
+			"/images/**",
+			"/fonts/**",
+			"/scripts/**",};
 		http.csrf().disable()
 			.authorizeHttpRequests((requests) -> requests
 				.requestMatchers("/", "/home").permitAll()
+				.requestMatchers("resources/**").permitAll()
+				.requestMatchers(staticResources).permitAll()
 				.anyRequest().authenticated()
 			)
 			.formLogin((form) -> form
@@ -36,7 +44,7 @@ public class WebSecurityConfig {
 			 User.withDefaultPasswordEncoder()
 				.username("1")
 				.password("1")
-				.roles("USER")
+				.roles("ADMIN")
 				.build();
 
 		return new InMemoryUserDetailsManager(user);
