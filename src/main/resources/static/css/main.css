@@ -1,5 +1,6 @@
 body {
     background-color: lightgray !important;
+    font-family: Gill Sans !important;
 }
 
 .imageAlaToo {
@@ -16,7 +17,7 @@ body {
 }
 
 #footer {
-    margin-top: 400px;
+    margin-top: 380px;
 }
 
 #login {

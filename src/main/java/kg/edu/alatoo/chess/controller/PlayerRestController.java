@@ -9,8 +9,6 @@ import java.util.Optional;
 
 @RestController
 public class PlayerRestController {
-    // CRUD
-    // POST, GET, PUT, DELETE
     private final PlayerRepository playerRepository;
 
     public PlayerRestController(PlayerRepository playerRepository) {

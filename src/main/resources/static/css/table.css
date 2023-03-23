@@ -1,0 +1,21 @@
+body {
+    background-color: lightgrey !important;
+    font-family: Gill Sans !important;
+}
+
+#logout {
+    margin-top: 50px;
+    margin-right: 15px;
+}
+
+#submitBtn {
+    border: 2px solid darkgrey; 
+    font-size: 15px;
+    background-color: grey;
+    transition-duration: 0.4s;
+}
+
+#submitBtn:hover {
+    background-color: lightskyblue;
+    color: white;
+}
