@@ -4,11 +4,11 @@ This is a Java Spring project.
 ## Technology
 Java 8, Spring Boot 2, PostgreSQL
 
-## Video presentation
+## YouTube presentation
 https://www.youtube.com/watch?v=EhQTn-kbikw
 
-## Gif presentation
-![2023-05-04 01-12-56(1)](https://user-images.githubusercontent.com/96371464/236042078-eb72d46a-bfec-4c29-ad8f-4ecb8543375b.gif)
+## Video presentation
+https://user-images.githubusercontent.com/96371464/236045147-561ece03-4f17-4a30-a26f-916505977824.mp4
 
 ## Swagger
 I choosed not the best version of Spring Boot, so my swagger is in chinese...
