@@ -1,3 +1,8 @@
+body {
+    background-color: lightgray !important;
+    font-family: Gill Sans !important;
+}
+
 table {
     border-collapse: collapse;
 }

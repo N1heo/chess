@@ -24,9 +24,9 @@
           <div class="col-lg-6">
             <form action="/order" method="post">
               <select name="id" id="product">
-                <option value="3">T-shirt</option>
-                <option value="1">Longsleeve</option>
-                <option value="2">Notebook</option>
+                <option value="1">T-shirt</option>
+                <option value="2">Longsleeve</option>
+                <option value="3">Notebook</option>
               </select>
               <input id="inputAmount" type="text" name="amount" placeholder="Enter amount: ">
         
