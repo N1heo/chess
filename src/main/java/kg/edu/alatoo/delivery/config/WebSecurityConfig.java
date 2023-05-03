@@ -28,12 +28,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .disable()
                 .authorizeRequests()
                     //No role
-                    .antMatchers("/registration").not().fullyAuthenticated()
+                    .antMatchers("/registration", "/swagger-ui/index.html").not().fullyAuthenticated()
                     //Admin role
                     .antMatchers("/admin/**").hasRole("ADMIN")
-                    .antMatchers("/news").hasRole("USER")
+                    .antMatchers("/order").hasRole("USER")
                     //Everyone
-                    .antMatchers("/", "/resources/**").permitAll()
+                    .antMatchers("/", "/resources/**", "/v3/**", "/swagger-ui/index.html").permitAll()
                 //Authenticated
                 .anyRequest().authenticated()
                 .and()
@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .formLogin()
                     .loginPage("/login")
                     //Redirect to main page
-                    .defaultSuccessUrl("/")
+                    .defaultSuccessUrl("/", true)
                     .permitAll()
                 .and()
                     .logout()

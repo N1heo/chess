@@ -1,0 +1,18 @@
+body {
+    background-color: lightgray !important;
+    font-family: Gill Sans !important;
+}
+
+.shirtImage {
+    width: 100%;
+    height:auto;
+    position: relative;
+}
+
+#footer {
+    position: relative;
+    margin-top: 0px; /* negative value of footer height */
+    height: 0px;
+    clear:both;
+    padding-top:40px;
+} 
