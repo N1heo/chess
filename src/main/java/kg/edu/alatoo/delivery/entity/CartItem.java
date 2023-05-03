@@ -1,7 +1,5 @@
 package kg.edu.alatoo.delivery.entity;
 
-import java.util.Optional;
-
 import javax.persistence.*;
 
 @Entity

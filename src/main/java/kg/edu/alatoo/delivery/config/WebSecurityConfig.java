@@ -28,12 +28,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .disable()
                 .authorizeRequests()
                     //No role
-                    .antMatchers("/registration", "/swagger-ui/index.html").not().fullyAuthenticated()
+                    .antMatchers("/registration").not().fullyAuthenticated()
                     //Admin role
                     .antMatchers("/admin/**").hasRole("ADMIN")
                     .antMatchers("/order").hasRole("USER")
                     //Everyone
-                    .antMatchers("/", "/resources/**", "/v3/**", "/swagger-ui/index.html").permitAll()
+                    .antMatchers("/", "/resources/**", "/v3/**", "/swagger-ui/**").permitAll()
                 //Authenticated
                 .anyRequest().authenticated()
                 .and()
